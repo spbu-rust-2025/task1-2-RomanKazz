@@ -7,18 +7,26 @@ fn main() {
         let mut input = String::new();
         io::stdin().read_line(&mut input).unwrap();
 
-        let num: i32 = input.trim().parse().unwrap();
+        let input = input.trim();
 
-        if num == -1 {
-            println!("{}", sum);
-            return;
+        match input.parse::<i32>() {
+            Ok(num) => {
+                if num == -1 {
+                    println!("{}", sum);
+                    return;
+                }
+
+                if num >= 0 {
+                    sum += num;
+                } else {
+                    println!("NaN");
+                    return;
+                }
+            }
+            Err(_) => {
+                println!("NaN");
+                return;
+            }
         }
-
-        if num < 0 {
-            println!("NaN");
-            return;
-        }
-
-        sum += num;
     }
 }
